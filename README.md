@@ -38,6 +38,22 @@ CONTAINER ID        IMAGE                  COMMAND                  CREATED     
 * Demo Daten mal auspacken und ansehen (z.B `www1/access.log` oder `www1/secure.log`)
 * weiter in der Doku https://docs.splunk.com/Documentation/Splunk/7.3.2/SearchTutorial/GetthetutorialdataintoSplunk
 
+## Übungen
+
+* nach useragent sortieren
+* prozentuale Verteilung HTTP OK / Fehler (`eval`)
+* nach Referrer Domain
+* `transaction` (`sourcetype=access_combined_wcookie  | transaction JSESSIONID`)
+* `iplocation` (`sourcetype=access_combined_wcookie | iplocation clientip`)
+
+```
+sourcetype=access_combined_wcookie | iplocation clientip | geostats latfield=lat longfield=lon count
+```
+oder
+```
+sourcetype=access_combined_wcookie | iplocation clientip | stats count by Country | geom geo_countries featureIdField="Country"
+```
+
 # Prometheus
 
 Installation und Test des `prometheus-node-exporter` (Exporter for machine metrics)
